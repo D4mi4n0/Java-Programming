@@ -1,7 +1,0 @@
-package TV;
-
-public class CanaliSovrapposti {
-    public CanaliSovrapposti(String message) {
-        super(message);
-    }
-}
