@@ -1,0 +1,63 @@
+package NumeriInteri;
+
+public class Insieme {
+
+    private int[] elementi;
+    private int numElementi;
+
+    public Insieme(int n) throws Exception {
+        if (n < 0) {
+            throw new Exception("Il numero di elementi non può essere negativo.");
+        }
+        this.elementi = new int[n];
+        this.numElementi = 0;
+    }
+
+    public boolean aggiungi(int x) {
+        if (numElementi >= elementi.length) {
+            return false; // L'insieme è pieno
+        }
+        for (int j = 0; j < numElementi; j++) {
+            if (elementi[j] == x) {
+                return false; // L'elemento è già presente
+            }
+        }
+        elementi[numElementi] = x;
+        numElementi++;
+        return true;
+    }
+
+    public boolean contiene(int x) {
+        for (int j = 0; j < numElementi; j++) {
+            if (elementi[j] == x) {
+                return true; // L'elemento è presente
+            }
+        }
+        return false; // L'elemento non è presente
+    }
+
+    public Insieme intersezione(Insieme that) throws Exception {
+        Insieme risultato = new Insieme(this.numElementi + that.numElementi);
+        for (int i = 0; i < this.numElementi; i++) {
+            if (that.contiene(this.elementi[i])) {
+                risultato.aggiungi(this.elementi[i]);
+            }
+        }
+        return risultato;
+    }
+
+    public Insieme differenza(Insieme that) throws Exception {
+        Insieme risultato = new Insieme(this.numElementi);
+        for (int i = 0; i < this.numElementi; i++) {
+            if (!that.contiene(this.elementi[i])) {
+                risultato.aggiungi(this.elementi[i]);
+            }
+        }
+        return risultato;
+    }
+
+    public int dimensione() {
+        return numElementi;
+    }
+
+}
